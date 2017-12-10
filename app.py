@@ -22,7 +22,7 @@ def upload():
     if os.path.isdir(os.path.join(APP_ROOT, 'files/{}'.format(folder_name))):
         print("folder exist")
     '''
-    target = os.path.join(APP_ROOT, 'static/')
+    target = os.path.join(APP_ROOT, 'static')
     print(target)
     if not os.path.isdir(target):
         os.mkdir(target)
