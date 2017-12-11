@@ -58,7 +58,12 @@ def detect_function():
     #call object recognzer here
     file = object_recognizer()
     print "doneee"
-@app.route("upload", methods=["POST"])
+
+@app.route("/foobar", methods=["POST"])
+def foobar():
+    print "inside foobar"
+
+@app.route("/upload", methods=["POST"])
 def upload():
    # folder_name = request.form['superhero']
     '''
