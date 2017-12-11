@@ -1,17 +1,17 @@
 import os
 
 from flask import Flask, request, render_template, send_from_directory
-import mechanize
+# import mechanize
 import re
 
 import time
 # from lxml import html  
 # import xlwt 
 # import xlrd 
-from django.utils.http import urlquote 
-from selenium import webdriver
-from selenium.common.exceptions import NoSuchElementException
-from selenium.webdriver.common.keys import Keys
+# from django.utils.http import urlquote 
+# from selenium import webdriver
+# from selenium.common.exceptions import NoSuchElementException
+# from selenium.webdriver.common.keys import Keys
 __author__ = 'ibininja'
 
 app = Flask(__name__)
@@ -21,11 +21,16 @@ APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 driver = webdriver.Chrome('C:\Users\Dev\Downloads\chromedriver_win32\chromedriver.exe') 
 #change location here, download chrome driver
 driver.maximize_window()
-def search_amazon(search_string):
+line=""
+
+@app.route("/search_amazon", methods=["POST"])
+def search_amazon(search_string=line):
     static_search_amazon = 'https://www.amazon.com/s/ref=nb_sb_noss_2?url=search-alias%3Daps&field-keywords='
     driver.get(static_search_amazon+urlquote(search_string).encode('utf8'))
+    return render_template("amazon.html")
 
-def search_walmart(search_string):
+@app.route("/search_walmart", methods=["POST"])
+def search_walmart(search_string=line):
     static_search_walmart1 = 'https://www.walmart.com/search/?query='
     static_search_walmart2 = '&cat_id=0'
     driver.get(static_search_walmart1+urlquote(search_string).encode('utf8')+static_search_walmart2)
@@ -62,6 +67,7 @@ def detect_function():
 @app.route("/foobar", methods=["POST"])
 def foobar():
     print "inside foobar"
+    return render_template("foobar.html")
 
 @app.route("/upload", methods=["POST"])
 def upload():
