@@ -1,17 +1,17 @@
 import os
 
 from flask import Flask, request, render_template, send_from_directory
-# import mechanize
+import mechanize
 import re
 
 import time
-# from lxml import html  
-# import xlwt 
-# import xlrd 
-# from django.utils.http import urlquote 
-# from selenium import webdriver
-# from selenium.common.exceptions import NoSuchElementException
-# from selenium.webdriver.common.keys import Keys
+from lxml import html  
+import xlwt 
+import xlrd 
+from django.utils.http import urlquote 
+from selenium import webdriver
+from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.common.keys import Keys
 __author__ = 'ibininja'
 
 app = Flask(__name__)
@@ -87,11 +87,11 @@ def upload():
         print("{} is the file name".format(upload.filename))
         filename = upload.filename
         # This is to verify files are supported
-        # ext = os.path.splitext(filename)[1]
-        # if (ext == ".jpg") or (ext == ".png"):
-            # print("File supported moving on...")
-        # else:
-            # render_template("Error.html", message="Files uploaded are not supported...")
+        ext = os.path.splitext(filename)[1]
+        if (ext == ".jpg") or (ext == ".png"):
+            print("File supported moving on...")
+        else:
+            render_template("Error.html", message="Files uploaded are not supported...")
         destination = "/".join([target, "temp.jpg"])
         print("Accept incoming file:", filename)
         print("Save it to:", destination)
@@ -108,11 +108,11 @@ def upload():
 #     return send_from_directory("images", filename)
 
 
-# @app.route('/gallery')
-# def get_gallery():
-#     image_names = os.listdir('./images')
-#     print(image_names)
-#     return render_template("gallery.html", image_names=image_names)
+@app.route('/gallery')
+def get_gallery():
+    image_names = os.listdir('./images')
+    print(image_names)
+    return render_template("gallery.html", image_names=image_names)
 
 
 if __name__ == "__main__":
